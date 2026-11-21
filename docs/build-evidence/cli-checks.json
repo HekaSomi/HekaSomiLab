@@ -1,0 +1,22 @@
+[
+  {
+    "check": "demo-v02",
+    "expected": 0,
+    "actual": 0
+  },
+  {
+    "check": "strict-v02",
+    "expected": 2,
+    "actual": 2
+  },
+  {
+    "check": "missing command input",
+    "expected": 2,
+    "actual": 2
+  },
+  {
+    "check": "missing replay output",
+    "expected": 1,
+    "actual": 1
+  }
+]

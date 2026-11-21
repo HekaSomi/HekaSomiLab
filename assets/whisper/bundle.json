@@ -1,0 +1,10 @@
+{
+  "version": "whisper.cpp-v1.9.5-hekasomi-static-1",
+  "modelName": "Whisper Base multilingual (Q5_1)",
+  "executable": "windows-x64/whisper-cli.exe",
+  "model": "models/ggml-base-q5_1.bin",
+  "sha256": {
+    "windows-x64/whisper-cli.exe": "d80d8e26fa486b4ca0a7a5d30273f49eb6012fd53e75d13f50a5a048ac18ac20",
+    "models/ggml-base-q5_1.bin": "422f1ae452ade6f30a004d7e5c6a43195e4433bc370bf23fac9cc591f01a8898"
+  }
+}

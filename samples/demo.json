@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "id": "hekasomi-demo-v1",
+  "name": "Demo · fixed fixtures, synthetic speech",
+  "sourceLanguage": "en",
+  "targetLanguage": "Spanish",
+  "cases": [
+    {
+      "id": "demo-1",
+      "name": "Negation",
+      "audioPath": "demo-1.wav",
+      "textInput": "Please do not cancel my reservation.",
+      "referenceTranscript": "Please do not cancel my reservation.",
+      "referenceTranslation": "Por favor, no cancele mi reserva.",
+      "baselineReplay": {
+        "transcript": "Please cancel my reservation.",
+        "translation": "Por favor, cancele mi reserva."
+      },
+      "candidateReplay": {
+        "transcript": "Please do not cancel my reservation.",
+        "translation": "Por favor, no cancele mi reserva."
+      }
+    },
+    {
+      "id": "demo-2",
+      "name": "Numbers",
+      "audioPath": "demo-2.wav",
+      "textInput": "The meeting starts at three thirty.",
+      "referenceTranscript": "The meeting starts at three thirty.",
+      "referenceTranslation": "La reunión empieza a las tres y media.",
+      "baselineReplay": {
+        "transcript": "The meeting starts at three thirteen.",
+        "translation": "La reunión empieza a las tres y trece."
+      },
+      "candidateReplay": {
+        "transcript": "The meeting starts at three thirty.",
+        "translation": "La reunión empieza a las tres y media."
+      }
+    },
+    {
+      "id": "demo-3",
+      "name": "Uncertainty",
+      "audioPath": "demo-3.wav",
+      "textInput": "I might be able to join tomorrow.",
+      "referenceTranscript": "I might be able to join tomorrow.",
+      "referenceTranslation": "Quizá pueda unirme mañana.",
+      "baselineReplay": {
+        "transcript": "I will be able to join tomorrow.",
+        "translation": "Podré unirme mañana."
+      },
+      "candidateReplay": {
+        "transcript": "I might be able to join tomorrow.",
+        "translation": "Quizá pueda unirme mañana."
+      }
+    },
+    {
+      "id": "demo-4",
+      "name": "Names",
+      "audioPath": "demo-4.wav",
+      "textInput": "Mina will meet Daniel at the station.",
+      "referenceTranscript": "Mina will meet Daniel at the station.",
+      "referenceTranslation": "Mina se encontrará con Daniel en la estación.",
+      "baselineReplay": {
+        "transcript": "Mina will meet Daniel at the station.",
+        "translation": "Mina se encontrará con Daniel en la estación."
+      },
+      "candidateReplay": {
+        "transcript": "Mina will meet Daniel at the station.",
+        "translation": "Mina se encontrará con Daniel en la estación."
+      }
+    },
+    {
+      "id": "demo-5",
+      "name": "Natural conversation",
+      "audioPath": "demo-5.wav",
+      "textInput": "Could you explain that a little more slowly?",
+      "referenceTranscript": "Could you explain that a little more slowly?",
+      "referenceTranslation": "¿Podrías explicarlo un poco más despacio?",
+      "baselineReplay": {
+        "transcript": "Could you explain that a little more slowly?",
+        "translation": "¿Podrías explicarlo un poco más despacio?"
+      },
+      "candidateReplay": {
+        "transcript": "Could you explain that a little more slowly?",
+        "translation": "¿Podrías explicarlo un poco más despacio?"
+      }
+    }
+  ]
+}

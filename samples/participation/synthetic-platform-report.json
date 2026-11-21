@@ -1,0 +1,289 @@
+{
+  "schema": "hekasomi.platform-report/1",
+  "id": "synthetic-report",
+  "exportedAt": "2026-11-20T15:43:16.1810303+00:00",
+  "evaluations": [
+    {
+      "session": {
+        "id": "synthetic-session",
+        "ownerId": "synthetic-owner",
+        "constructId": "synthetic-profile",
+        "constructVersion": 1,
+        "constructHash": "synthetic-only",
+        "test": {
+          "schema": "hekasomi.participation-test/1",
+          "id": "hekasomi-scenarios-pilot",
+          "version": "1",
+          "language": "en",
+          "title": "Everyday choices \u00B7 12-question practice test",
+          "items": [
+            {
+              "id": "p01",
+              "question": "You join a meetup where you know nobody. What do you usually do first?",
+              "options": [
+                "Start a conversation",
+                "Listen before joining in",
+                "Look for a shared activity"
+              ]
+            },
+            {
+              "id": "p02",
+              "question": "Your group has one free afternoon. How would you choose what to do?",
+              "options": [
+                "Make a plan in advance",
+                "Decide together on the day",
+                "Leave time for something spontaneous"
+              ]
+            },
+            {
+              "id": "p03",
+              "question": "A friend asks you to explain a new tool. Where would you start?",
+              "options": [
+                "A concrete example",
+                "The overall idea",
+                "A step-by-step demonstration"
+              ]
+            },
+            {
+              "id": "p04",
+              "question": "You disagree with a teammate\u0027s suggestion. What feels most natural?",
+              "options": [
+                "State my concern directly",
+                "Ask questions about their reasoning",
+                "Take time to think before replying"
+              ]
+            },
+            {
+              "id": "p05",
+              "question": "You have to learn an unfamiliar game. What would you prefer?",
+              "options": [
+                "Read the rules first",
+                "Watch a round",
+                "Learn while playing"
+              ]
+            },
+            {
+              "id": "p06",
+              "question": "A group conversation moves very quickly. What do you tend to do?",
+              "options": [
+                "Jump in when I have a thought",
+                "Wait for a clear opening",
+                "Return to my point afterward"
+              ]
+            },
+            {
+              "id": "p07",
+              "question": "Your team finishes a difficult task. What would you most want to do next?",
+              "options": [
+                "Review what could improve",
+                "Celebrate with the group",
+                "Take a quiet break"
+              ]
+            },
+            {
+              "id": "p08",
+              "question": "A new activity has an uncertain outcome. Which approach suits you?",
+              "options": [
+                "Try a small experiment",
+                "Gather more information first",
+                "Ask someone to try it with me"
+              ]
+            },
+            {
+              "id": "p09",
+              "question": "You can give feedback on a project. What would you emphasize first?",
+              "options": [
+                "What works well",
+                "The most useful improvement",
+                "Questions about the creator\u0027s goals"
+              ]
+            },
+            {
+              "id": "p10",
+              "question": "You have a free evening with no commitments. What appeals most?",
+              "options": [
+                "Spend time with other people",
+                "Work on a personal interest",
+                "Rest without making a plan"
+              ]
+            },
+            {
+              "id": "p11",
+              "question": "A teammate is confused by your message. How would you clarify it?",
+              "options": [
+                "Rewrite it more briefly",
+                "Add an example",
+                "Talk it through together"
+              ]
+            },
+            {
+              "id": "p12",
+              "question": "Your group must choose between two equally good ideas. What would you suggest?",
+              "options": [
+                "Compare explicit criteria",
+                "Take a group vote",
+                "Try one and revisit later"
+              ]
+            }
+          ]
+        },
+        "humanAnswers": {
+          "p01": "Start a conversation",
+          "p02": "Make a plan in advance",
+          "p03": "A concrete example",
+          "p04": "State my concern directly",
+          "p05": "Read the rules first",
+          "p06": "Jump in when I have a thought",
+          "p07": "Review what could improve",
+          "p08": "Try a small experiment",
+          "p09": "What works well",
+          "p10": "Spend time with other people",
+          "p11": "Rewrite it more briefly",
+          "p12": "Compare explicit criteria"
+        },
+        "sealedAt": "2026-11-20T15:43:16.1802619+00:00",
+        "heldOutAttested": true
+      },
+      "run": {
+        "id": "synthetic-run",
+        "sessionId": "synthetic-session",
+        "connection": {
+          "provider": "synthetic",
+          "model": "fixture",
+          "transport": "ExternalAgent",
+          "baseUrl": "http://localhost:11434",
+          "credentialEnvironmentVariable": "",
+          "timeoutSeconds": 90,
+          "maxOutputTokens": 2048,
+          "apiVersion": "2026-10-21"
+        },
+        "condition": "Combined",
+        "compilerVersion": "participation-claims-v1",
+        "contextHash": "7b75bedbbb384b01e95f9fc18b59871a799d123e3bfbe1c0eb16f62acdd55180",
+        "createdAt": "2026-11-20T15:43:16.1808101+00:00",
+        "evidenceKind": "synthetic-demo"
+      },
+      "responses": [
+        {
+          "runId": "synthetic-run",
+          "itemId": "p01",
+          "state": "Answered",
+          "choice": "Start a conversation",
+          "actualModel": null,
+          "elapsedMs": null,
+          "errorCode": null
+        },
+        {
+          "runId": "synthetic-run",
+          "itemId": "p02",
+          "state": "Answered",
+          "choice": "Decide together on the day",
+          "actualModel": null,
+          "elapsedMs": null,
+          "errorCode": null
+        },
+        {
+          "runId": "synthetic-run",
+          "itemId": "p03",
+          "state": "Answered",
+          "choice": "A concrete example",
+          "actualModel": null,
+          "elapsedMs": null,
+          "errorCode": null
+        },
+        {
+          "runId": "synthetic-run",
+          "itemId": "p04",
+          "state": "Answered",
+          "choice": "Ask questions about their reasoning",
+          "actualModel": null,
+          "elapsedMs": null,
+          "errorCode": null
+        },
+        {
+          "runId": "synthetic-run",
+          "itemId": "p05",
+          "state": "Answered",
+          "choice": "Read the rules first",
+          "actualModel": null,
+          "elapsedMs": null,
+          "errorCode": null
+        },
+        {
+          "runId": "synthetic-run",
+          "itemId": "p06",
+          "state": "Answered",
+          "choice": "Wait for a clear opening",
+          "actualModel": null,
+          "elapsedMs": null,
+          "errorCode": null
+        },
+        {
+          "runId": "synthetic-run",
+          "itemId": "p07",
+          "state": "Answered",
+          "choice": "Review what could improve",
+          "actualModel": null,
+          "elapsedMs": null,
+          "errorCode": null
+        },
+        {
+          "runId": "synthetic-run",
+          "itemId": "p08",
+          "state": "Answered",
+          "choice": "Gather more information first",
+          "actualModel": null,
+          "elapsedMs": null,
+          "errorCode": null
+        },
+        {
+          "runId": "synthetic-run",
+          "itemId": "p09",
+          "state": "Answered",
+          "choice": "What works well",
+          "actualModel": null,
+          "elapsedMs": null,
+          "errorCode": null
+        },
+        {
+          "runId": "synthetic-run",
+          "itemId": "p10",
+          "state": "Answered",
+          "choice": "Work on a personal interest",
+          "actualModel": null,
+          "elapsedMs": null,
+          "errorCode": null
+        },
+        {
+          "runId": "synthetic-run",
+          "itemId": "p11",
+          "state": "Answered",
+          "choice": "Rewrite it more briefly",
+          "actualModel": null,
+          "elapsedMs": null,
+          "errorCode": null
+        },
+        {
+          "runId": "synthetic-run",
+          "itemId": "p12",
+          "state": "Answered",
+          "choice": "Take a group vote",
+          "actualModel": null,
+          "elapsedMs": null,
+          "errorCode": null
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "synthetic-event",
+      "sessionId": "synthetic-game",
+      "kind": "joined",
+      "actorKind": "agent",
+      "occurredAt": "2026-11-20T15:43:16.1816611+00:00",
+      "durationMs": null,
+      "provider": null
+    }
+  ]
+}

@@ -1,0 +1,622 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:controls="clr-namespace:HekaSomi.Lab.Desktop.Controls" x:Class="HekaSomi.Lab.Desktop.MainWindow" Title="HekaSomi Translation Lab" Width="1360" Height="920" MinWidth="1000" MinHeight="700" WindowStartupLocation="CenterScreen">
+  <DockPanel>
+    <Border DockPanel.Dock="Top" Background="#122C39" Padding="28,20">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition/>
+          <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+          <TextBlock Text="HEKASOMI" Foreground="#7BD4C3" FontWeight="Bold" FontSize="12"/>
+          <TextBlock Text="HekaSomi Lab" Foreground="White" FontSize="25" FontWeight="SemiBold"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+          <TextBlock Text="ENGINEERING + PERSONALITY RESEARCH" Foreground="#A9BEC9" FontSize="11"/>
+          <TextBlock Text="Local workspace  /  v0.3" Foreground="White" HorizontalAlignment="Right" Margin="0,5,0,0"/>
+        </StackPanel>
+      </Grid>
+    </Border>
+    <TabControl x:Name="Pages" SelectionChanged="OnPageChanged" Background="#F3F6F8" BorderThickness="0" SelectedIndex="{Binding SelectedTab}">
+      <TabItem Header="Start">
+        <DockPanel DataContext="{Binding QuickTest}">
+          <TextBlock DockPanel.Dock="Bottom" Text="{Binding Message}" Padding="16,10" Background="#E2EFEC"/>
+          <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="24">
+              <TextBlock Text="Speak freely. Start here." Style="{StaticResource Heading}"/>
+              <TextBlock Text="Speech recognition is included and runs on your computer. No account, downloads or model server needed." Margin="0,0,0,20"/>
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="*"/>
+                  <ColumnDefinition Width="24"/>
+                  <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                  <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                      <TextBlock Text="1. Choose your audio" Style="{StaticResource Section}"/>
+                      <WrapPanel IsEnabled="{Binding CanStart}">
+                        <Button Content="Try sample" Command="{Binding TrySampleCommand}" Style="{StaticResource Primary}"/>
+                        <Button Content="Choose audio file" Command="{Binding ChooseAudioCommand}"/>
+                      </WrapPanel>
+                      <TextBlock Text="WAV and MP3, plus formats supported by Windows. Up to 10 minutes and 250 MB; conversion is automatic." Foreground="{StaticResource Muted}" Margin="0,8"/>
+                      <TextBlock Text="Microphone" Style="{StaticResource Label}"/>
+                      <ComboBox ItemsSource="{Binding Microphones}" SelectedItem="{Binding SelectedMicrophone}" DisplayMemberPath="Name" IsEnabled="{Binding CanStart}" AutomationProperties.Name="Microphone"/>
+                      <WrapPanel>
+                        <Button Content="Record my voice" Command="{Binding StartRecordingCommand}" IsEnabled="{Binding CanStart}"/>
+                        <Button Content="Stop recording" Command="{Binding StopRecordingCommand}" IsEnabled="{Binding IsRecording}"/>
+                        <Button Content="Refresh microphones" Command="{Binding RefreshMicrophonesCommand}" IsEnabled="{Binding CanStart}"/>
+                      </WrapPanel>
+                      <DockPanel Margin="0,10">
+                        <TextBlock DockPanel.Dock="Right" Text="{Binding Elapsed}" FontWeight="SemiBold" Margin="12,0,0,0"/>
+                        <ProgressBar Value="{Binding RecordingLevel}" Maximum="100" Height="12" AutomationProperties.Name="Microphone input level"/>
+                      </DockPanel>
+                      <TextBlock Text="{Binding AudioLabel}" FontWeight="SemiBold" Margin="0,10"/>
+                      <controls:Waveform Peaks="{Binding Peaks}" Height="65"/>
+                      <WrapPanel IsEnabled="{Binding CanStart}">
+                        <Button Content="Play" Command="{Binding PlayCommand}"/>
+                        <Button Content="Stop audio" Command="{Binding StopPlaybackCommand}"/>
+                        <Button Content="Clear" Command="{Binding ClearCommand}"/>
+                      </WrapPanel>
+                    </StackPanel>
+                  </Border>
+                  <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                      <TextBlock Text="2. Choose the result" Style="{StaticResource Section}"/>
+                      <TextBlock Text="Spoken language" Style="{StaticResource Label}"/>
+                      <ComboBox ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}" DisplayMemberPath="Name" IsEnabled="{Binding CanStart}"/>
+                      <CheckBox Content="Translate speech into English" IsChecked="{Binding TranslateToEnglish}" IsEnabled="{Binding CanStart}"/>
+                      <TextBlock Text="Leave unchecked to keep the spoken language. Other target languages and personality styling use an optional language model in Setup." Foreground="{StaticResource Muted}"/>
+                      <WrapPanel Margin="0,12">
+                        <Button Content="{Binding ProcessLabel}" Command="{Binding TranscribeCommand}" Style="{StaticResource Primary}" IsEnabled="{Binding CanProcess}"/>
+                        <Button Content="Cancel" Command="{Binding CancelCommand}" IsEnabled="{Binding IsBusy}"/>
+                      </WrapPanel>
+                      <ProgressBar IsIndeterminate="{Binding IsBusy}" Height="5"/>
+                    </StackPanel>
+                  </Border>
+                </StackPanel>
+                <Border Grid.Column="2" Style="{StaticResource Card}">
+                  <StackPanel>
+                    <TextBlock Text="3. Review your words" Style="{StaticResource Section}"/>
+                    <TextBlock Text="Review and correct the result before using it." Foreground="{StaticResource Muted}" Margin="0,0,0,14"/>
+                    <TextBox Text="{Binding Result, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{Binding IsBusy}" AcceptsReturn="True" TextWrapping="Wrap" Height="320" VerticalScrollBarVisibility="Auto" FontSize="18" Padding="16" AutomationProperties.Name="Transcript or English translation"/>
+                    <WrapPanel Margin="0,12">
+                      <Button Content="Copy text" Command="{Binding CopyResultCommand}" IsEnabled="{Binding HasResult}"/>
+                      <Button Content="Save text file" Command="{Binding SaveResultCommand}" IsEnabled="{Binding HasResult}"/>
+                    </WrapPanel>
+                    <TextBlock Text="{Binding Timing}" Foreground="{StaticResource Muted}" Margin="0,8"/>
+                    <Border BorderBrush="{StaticResource Line}" BorderThickness="0,1,0,0" Margin="0,20,0,0" Padding="0,14,0,0">
+                      <StackPanel>
+                        <TextBlock Text="Ready to go further?" FontSize="18" FontWeight="SemiBold"/>
+                        <TextBlock Text="Compare translations, or capture an owner-reviewed personality from interview evidence." Foreground="{StaticResource Muted}" Margin="0,8"/>
+                        <WrapPanel>
+                          <Button Content="Compare translations" Command="{Binding DataContext.GoToBenchCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                          <Button Content="Create a personality" Command="{Binding DataContext.GoToPersonalityCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                          <Button Content="Open setup" Command="{Binding DataContext.GoToSetupCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                        </WrapPanel>
+                      </StackPanel>
+                    </Border>
+                    <Expander Header="Diagnostic details" Margin="0,12">
+                      <TextBox Text="{Binding ErrorDetails, Mode=OneWay}" IsReadOnly="True" TextWrapping="Wrap"/>
+                    </Expander>
+                  </StackPanel>
+                </Border>
+              </Grid>
+              <TextBlock Text="Quick tests are temporary. Audio is deleted when cleared or on normal app close; saved text files remain. Use Personality studio to keep interview evidence." Foreground="{StaticResource Muted}"/>
+            </StackPanel>
+          </ScrollViewer>
+        </DockPanel>
+      </TabItem>
+      <TabItem Header="Compare">
+        <DockPanel DataContext="{Binding Benchmark}">
+          <StackPanel DockPanel.Dock="Bottom" Background="#E2EFEC">
+            <ProgressBar IsIndeterminate="{Binding IsBusy}" Height="3"/>
+            <DockPanel Margin="12,6">
+              <Button DockPanel.Dock="Right" Content="Cancel" Command="{Binding CancelCommand}" IsEnabled="{Binding IsBusy}"/>
+              <TextBlock Text="{Binding Message}" VerticalAlignment="Center"/>
+            </DockPanel>
+          </StackPanel>
+          <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="24">
+              <TextBlock Text="Translation bench" Style="{StaticResource Heading}"/>
+              <TextBlock Text="Compare two pipelines on the same evidence. Inspect the words, then assess the meaning." Margin="0,0,0,20"/>
+              <Border Style="{StaticResource Card}">
+                <StackPanel>
+                  <WrapPanel IsEnabled="{Binding IsIdle}">
+                    <Button Content="New comparison" Command="{Binding NewDatasetCommand}"/>
+                    <Button Content="Load demo" Command="{Binding LoadDemoCommand}"/>
+                    <Button Content="Import dataset" Command="{Binding ImportCommand}"/>
+                    <Button Content="Export dataset" Command="{Binding SaveDatasetCommand}"/>
+                    <Button Content="Remove sample" Command="{Binding RemoveSampleCommand}"/>
+                  </WrapPanel>
+                  <DataGrid ItemsSource="{Binding Cases}" SelectedItem="{Binding SelectedCase}" IsReadOnly="True" Height="170" Margin="0,12,0,12">
+                    <DataGrid.Columns>
+                      <DataGridTextColumn Header="Sample" Binding="{Binding Name}" Width="180"/>
+                      <DataGridTextColumn Header="Reference transcript" Binding="{Binding ReferenceTranscript}" Width="*"/>
+                      <DataGridTextColumn Header="Reference translation" Binding="{Binding ReferenceTranslation}" Width="*"/>
+                    </DataGrid.Columns>
+                  </DataGrid>
+                  <controls:Waveform Peaks="{Binding Peaks}" Height="70"/>
+                  <TextBlock Text="{Binding WaveDetails}" Foreground="{StaticResource Muted}" Margin="0,8"/>
+                  <WrapPanel>
+                    <Button Content="Play selected" Command="{Binding PlayCommand}"/>
+                    <Button Content="Stop audio" Command="{Binding StopAudioCommand}"/>
+                    <Slider Value="{Binding SeekPercent}" Minimum="0" Maximum="100" Width="200" VerticalAlignment="Center" AutomationProperties.Name="Seek percent"/>
+                    <Button Content="Seek" Command="{Binding SeekCommand}"/>
+                  </WrapPanel>
+                  <Expander Header="Add an audio or text sample" Margin="0,12,0,0">
+                    <StackPanel IsEnabled="{Binding IsIdle}">
+                      <TextBlock Text="Sample name" Style="{StaticResource Label}"/>
+                      <TextBox Text="{Binding SampleName}"/>
+                      <DockPanel>
+                        <Button DockPanel.Dock="Right" Content="Choose audio" Command="{Binding BrowseAudioCommand}"/>
+                        <TextBox Text="{Binding AudioPath}" ToolTip="Optional audio file; supported formats are converted automatically."/>
+                      </DockPanel>
+                      <TextBlock Text="Source text (for text translation)" Style="{StaticResource Label}"/>
+                      <TextBox Text="{Binding TextInput}" AcceptsReturn="True" Height="60" TextWrapping="Wrap"/>
+                      <TextBlock Text="Human reference transcript" Style="{StaticResource Label}"/>
+                      <TextBox Text="{Binding ReferenceTranscript}"/>
+                      <TextBlock Text="Human reference translation" Style="{StaticResource Label}"/>
+                      <TextBox Text="{Binding ReferenceTranslation}"/>
+                      <Button Content="Add sample" Command="{Binding AddSampleCommand}" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                  </Expander>
+                </StackPanel>
+              </Border>
+              <Border Style="{StaticResource Card}">
+                <StackPanel>
+                  <TextBlock Text="Run configuration" Style="{StaticResource Section}"/>
+                  <Grid IsEnabled="{Binding IsIdle}">
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition/>
+                      <ColumnDefinition Width="180"/>
+                      <ColumnDefinition Width="180"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="0,0,12,0">
+                      <TextBlock Text="Dataset name"/>
+                      <TextBox Text="{Binding DatasetName}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Margin="0,0,12,0">
+                      <TextBlock Text="Source language code"/>
+                      <TextBox Text="{Binding SourceLanguage}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                      <TextBlock Text="Target language"/>
+                      <TextBox Text="{Binding TargetLanguage}"/>
+                    </StackPanel>
+                  </Grid>
+                  <WrapPanel IsEnabled="{Binding IsIdle}">
+                    <ComboBox ItemsSource="{Binding EngineChoices}" Width="340" SelectedValue="{Binding EngineKind}" SelectedValuePath="Kind" DisplayMemberPath="Label"/>
+                    <CheckBox Content="Candidate uses personality style" IsChecked="{Binding UsePersonality}"/>
+                    <Button Content="Refresh constructs" Command="{Binding RefreshConstructsCommand}"/>
+                    <ComboBox ItemsSource="{Binding Constructs}" SelectedItem="{Binding SelectedConstruct}" Width="200">
+                      <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                          <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text=" · v"/>
+                            <TextBlock Text="{Binding Version}"/>
+                            <TextBlock Text=" · "/>
+                            <TextBlock Text="{Binding Status}"/>
+                          </StackPanel>
+                        </DataTemplate>
+                      </ComboBox.ItemTemplate>
+                    </ComboBox>
+                  </WrapPanel>
+                  <TextBlock Text="Replay uses fixed demo outputs and has no measured latency. Live engines use the baseline and candidate models from Setup." Foreground="{StaticResource Muted}" Margin="0,6"/>
+                  <WrapPanel>
+                    <Button Content="Run A / B comparison" Style="{StaticResource Primary}" Command="{Binding RunCommand}" IsEnabled="{Binding IsIdle}"/>
+                    <Button Content="Cancel" Command="{Binding CancelCommand}"/>
+                    <Button Content="Export latest report" Command="{Binding ExportCommand}" IsEnabled="{Binding IsIdle}"/>
+                    <Button Content="Open export folder" Command="{Binding OpenExportCommand}"/>
+                  </WrapPanel>
+                  <ProgressBar Value="{Binding Progress}" Maximum="100" Height="5" Margin="0,10"/>
+                  <TextBlock Text="{Binding Summary}" FontWeight="SemiBold"/>
+                </StackPanel>
+              </Border>
+              <Border Style="{StaticResource Card}">
+                <StackPanel>
+                  <TextBlock Text="Results and evidence" Style="{StaticResource Section}"/>
+                  <DataGrid ItemsSource="{Binding Results}" IsReadOnly="True" Height="240" SelectedItem="{Binding SelectedResult}">
+                    <DataGrid.Columns>
+                      <DataGridTextColumn Header="Sample" Binding="{Binding CaseName}" Width="140"/>
+                      <DataGridTextColumn Header="Arm" Binding="{Binding Arm}" Width="85"/>
+                      <DataGridTextColumn Header="Transcript" Binding="{Binding Output.Transcript}" Width="*"/>
+                      <DataGridTextColumn Header="Translation" Binding="{Binding Output.Translation}" Width="*"/>
+                      <DataGridTextColumn Header="WER" Binding="{Binding WordScore.Rate, StringFormat=P1}" Width="65"/>
+                      <DataGridTextColumn Header="Request ms" Binding="{Binding Output.TotalMs, StringFormat=N0}" Width="90"/>
+                      <DataGridTextColumn Header="Error" Binding="{Binding Error}" Width="130"/>
+                    </DataGrid.Columns>
+                  </DataGrid>
+                  <TextBlock Text="Selected translation" Style="{StaticResource Label}"/>
+                  <TextBox Text="{Binding SelectedResult.Output.Translation, Mode=OneWay}" IsReadOnly="True" TextWrapping="Wrap" Height="100" VerticalScrollBarVisibility="Auto"/>
+                  <Button Content="Copy translation" Command="{Binding CopyTranslationCommand}" HorizontalAlignment="Left"/>
+                  <DataGrid ItemsSource="{Binding Gates}" IsReadOnly="True" Height="210" Margin="0,16,0,0">
+                    <DataGrid.Columns>
+                      <DataGridTextColumn Header="Check" Binding="{Binding Metric}" Width="230"/>
+                      <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="110"/>
+                      <DataGridTextColumn Header="Interpretation" Binding="{Binding Detail}" Width="*"/>
+                    </DataGrid.Columns>
+                  </DataGrid>
+                </StackPanel>
+              </Border>
+            </StackPanel>
+          </ScrollViewer>
+        </DockPanel>
+      </TabItem>
+      <TabItem Header="Personality">
+        <DockPanel DataContext="{Binding Personality}">
+          <StackPanel DockPanel.Dock="Bottom" Background="#E2EFEC">
+            <ProgressBar IsIndeterminate="{Binding IsBusy}" Height="3"/>
+            <DockPanel Margin="12,6">
+              <Button DockPanel.Dock="Right" Content="Cancel" Command="{Binding CancelCommand}" IsEnabled="{Binding IsBusy}"/>
+              <TextBlock Text="{Binding Message}" VerticalAlignment="Center"/>
+            </DockPanel>
+          </StackPanel>
+          <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="24">
+              <TextBlock Text="Personality studio" Style="{StaticResource Heading}"/>
+              <TextBlock Text="A versioned, owner-reviewed representation of preferences and context. No clinical labels or claims of a complete digital person." Margin="0,0,0,20"/>
+              <Border Style="{StaticResource Card}">
+                <StackPanel>
+                  <WrapPanel IsEnabled="{Binding IsIdle}">
+                    <Button Content="Refresh saved" Command="{Binding RefreshCommand}"/>
+                    <ComboBox ItemsSource="{Binding Constructs}" SelectedItem="{Binding SelectedConstruct}" Width="310" IsEnabled="{Binding CanSwitchConstruct}">
+                      <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                          <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text=" · v"/>
+                            <TextBlock Text="{Binding Version}"/>
+                            <TextBlock Text=" · "/>
+                            <TextBlock Text="{Binding Status}"/>
+                          </StackPanel>
+                        </DataTemplate>
+                      </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Button Content="New construct" Command="{Binding NewCommand}"/>
+                    <Button Content="New revision" Command="{Binding ReviseCommand}"/>
+                  </WrapPanel>
+                  <TextBlock Text="{Binding VersionLabel}" FontWeight="Bold" Margin="0,8"/>
+                  <TextBlock Text="{Binding OwnerId, StringFormat=Owner ID: {0}}" Foreground="{StaticResource Muted}"/>
+                  <StackPanel IsEnabled="{Binding IsDraft}">
+                    <TextBlock Text="Display name" Style="{StaticResource Label}"/>
+                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Text="Preferred communication style" Style="{StaticResource Label}"/>
+                    <TextBox Text="{Binding Style, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"/>
+                    <CheckBox Content="The owner consents to capture and model processing for this lab session." IsChecked="{Binding Consent}"/>
+                  </StackPanel>
+                </StackPanel>
+              </Border>
+              <Border Style="{StaticResource Card}">
+                <StackPanel>
+                  <TextBlock Text="01 / Guided interview" Style="{StaticResource Section}"/>
+                  <TextBlock Text="Offer examples and counterexamples. Skip anything the owner does not want recorded." Foreground="{StaticResource Muted}"/>
+                  <StackPanel IsEnabled="{Binding IsDraft}">
+                    <ComboBox ItemsSource="{Binding Modules}" SelectedItem="{Binding SelectedModule}" DisplayMemberPath="Title" IsEnabled="{Binding CanSwitchConstruct}"/>
+                    <TextBlock Text="{Binding SelectedModule.Prompt}" FontSize="18" Margin="0,10"/>
+                    <TextBlock Text="{Binding SelectedModule.FollowUp}" Foreground="{StaticResource Muted}"/>
+                    <WrapPanel>
+                      <ComboBox ItemsSource="{Binding SpokenLanguages}" SelectedItem="{Binding SpokenLanguage}" DisplayMemberPath="Name" Width="190"/>
+                      <ComboBox ItemsSource="{Binding Microphones}" SelectedItem="{Binding SelectedMicrophone}" DisplayMemberPath="Name" Width="250"/>
+                      <Button Content="Refresh microphones" Command="{Binding RefreshMicrophonesCommand}"/>
+                      <Button Content="Record" Command="{Binding StartRecordingCommand}"/>
+                      <Button Content="Stop recording" Command="{Binding StopRecordingCommand}"/>
+                      <Button Content="Transcribe recording" Command="{Binding TranscribeCommand}"/>
+                      <Button Content="Discard recording" Command="{Binding DiscardRecordingCommand}"/>
+                    </WrapPanel>
+                    <TextBlock Text="{Binding IsRecording, StringFormat=Recording active: {0}}" Foreground="#AF3D2D" FontWeight="Bold"/>
+                    <TextBox Text="{Binding Response, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" TextWrapping="Wrap" Height="120" VerticalScrollBarVisibility="Auto" Margin="0,10"/>
+                    <Button Content="Save interview answer" Command="{Binding AddEvidenceCommand}" Style="{StaticResource Primary}" HorizontalAlignment="Left"/>
+                  </StackPanel>
+                  <DataGrid ItemsSource="{Binding Evidence}" SelectedItem="{Binding SelectedEvidence}" IsReadOnly="True" Height="180" Margin="0,14,0,0">
+                    <DataGrid.Columns>
+                      <DataGridTextColumn Header="Module" Binding="{Binding ModuleId}" Width="130"/>
+                      <DataGridTextColumn Header="Answer" Binding="{Binding Text}" Width="*"/>
+                      <DataGridTextColumn Header="Source ID" Binding="{Binding Id}" Width="260"/>
+                    </DataGrid.Columns>
+                  </DataGrid>
+                  <TextBox Text="{Binding SelectedEvidence.Text, Mode=OneWay}" IsReadOnly="True" TextWrapping="Wrap" MaxHeight="150" VerticalScrollBarVisibility="Auto"/>
+                  <Button Content="Play selected evidence" Command="{Binding PlayEvidenceCommand}" HorizontalAlignment="Left"/>
+                </StackPanel>
+              </Border>
+              <Border Style="{StaticResource Card}">
+                <StackPanel>
+                  <TextBlock Text="02 / Evidence-backed claims" Style="{StaticResource Section}"/>
+                  <TextBlock Text="Select an interview answer, add a claim, then edit its context. Check Approved only when the owner agrees. Use category Communication for translator style." Foreground="{StaticResource Muted}"/>
+                  <WrapPanel IsEnabled="{Binding IsDraft}">
+                    <Button Content="Add claim from selected answer" Command="{Binding AddClaimCommand}"/>
+                    <Button Content="Suggest with local model" Command="{Binding SuggestClaimsCommand}"/>
+                    <Button Content="Remove selected claim" Command="{Binding RemoveClaimCommand}"/>
+                  </WrapPanel>
+                  <DataGrid ItemsSource="{Binding Claims}" SelectedItem="{Binding SelectedClaim}" IsEnabled="{Binding IsDraft}" Height="220">
+                    <DataGrid.Columns>
+                      <DataGridCheckBoxColumn Header="Approved" Binding="{Binding Approved, UpdateSourceTrigger=PropertyChanged}" Width="85"/>
+                      <DataGridTextColumn Header="Statement" Binding="{Binding Statement, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                      <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="130"/>
+                      <DataGridTextColumn Header="Context / exceptions" Binding="{Binding Context}" Width="*"/>
+                      <DataGridTextColumn Header="Source ID" Binding="{Binding SourceId}" Width="230"/>
+                    </DataGrid.Columns>
+                  </DataGrid>
+                </StackPanel>
+              </Border>
+              <Border Style="{StaticResource Card}">
+                <StackPanel>
+                  <TextBlock Text="03 / IPIP Big Five factor markers" Style="{StaticResource Section}"/>
+                  <TextBlock Text="Describe yourself as you generally are. 1 Very inaccurate · 2 Moderately inaccurate · 3 Neither inaccurate nor accurate · 4 Moderately accurate · 5 Very accurate. Leave unanswered items blank. This 50-item English instrument uses a fixed interleaved order." Margin="0,0,0,12"/>
+                  <DataGrid ItemsSource="{Binding Answers}" IsEnabled="{Binding IsDraft}" Height="310">
+                    <DataGrid.Columns>
+                      <DataGridTextColumn Header="Item" Binding="{Binding Id}" IsReadOnly="True" Width="55"/>
+                      <DataGridTextColumn Header="Statement" Binding="{Binding Text}" IsReadOnly="True" Width="*"/>
+                      <DataGridTemplateColumn Header="Your response" Width="210">
+                        <DataGridTemplateColumn.CellTemplate>
+                          <DataTemplate>
+                            <ComboBox ItemsSource="{Binding DataContext.RatingChoices, RelativeSource={RelativeSource AncestorType=DataGrid}}" SelectedValuePath="Value" SelectedValue="{Binding Answer, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Label"/>
+                          </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                      </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                  </DataGrid>
+                  <Button Content="Calculate raw scores" Command="{Binding ScoreCommand}" HorizontalAlignment="Left"/>
+                  <ItemsControl ItemsSource="{Binding Scores}">
+                    <ItemsControl.ItemTemplate>
+                      <DataTemplate>
+                        <DockPanel Margin="0,5">
+                          <TextBlock Text="{Binding Domain}" Width="220" FontWeight="SemiBold"/>
+                          <TextBlock Text="{Binding Display}"/>
+                        </DockPanel>
+                      </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                  </ItemsControl>
+                  <TextBlock Text="Public-domain IPIP items. Reverse scoring is applied. No population percentiles, diagnosis, or imputation." Foreground="{StaticResource Muted}" Margin="0,10"/>
+                </StackPanel>
+              </Border>
+              <Border Style="{StaticResource Card}">
+                <StackPanel>
+                  <TextBlock Text="04 / Review and activate" Style="{StaticResource Section}"/>
+                  <CheckBox Content="The owner reviewed this version and approves the selected claims and questionnaire answers." IsChecked="{Binding OwnerReviewed}" IsEnabled="{Binding IsDraft}"/>
+                  <WrapPanel IsEnabled="{Binding IsIdle}">
+                    <Button Content="Save draft" Command="{Binding SaveCommand}"/>
+                    <Button Content="Approve version" Command="{Binding ApproveCommand}" Style="{StaticResource Primary}"/>
+                    <Button Content="Revoke version" Command="{Binding RevokeCommand}"/>
+                    <Button Content="Export style JSON" Command="{Binding ExportStyleCommand}"/>
+                    <Button Content="Delete construct" Command="{Binding DeleteCommand}"/>
+                  </WrapPanel>
+                  <TextBox Text="{Binding Preview, Mode=OneWay}" IsReadOnly="True" Height="160" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" FontFamily="Consolas" Margin="0,12"/>
+                </StackPanel>
+              </Border>
+              <Button Content="Cancel model operation" Command="{Binding CancelCommand}" HorizontalAlignment="Left"/>
+            </StackPanel>
+          </ScrollViewer>
+        </DockPanel>
+      </TabItem>
+      <TabItem Header="Evaluation">
+        <DockPanel DataContext="{Binding Validation}">
+          <StackPanel DockPanel.Dock="Bottom" Background="#E2EFEC">
+            <ProgressBar IsIndeterminate="{Binding IsBusy}" Height="3"/>
+            <DockPanel Margin="12,6">
+              <Button DockPanel.Dock="Right" Content="Cancel" Command="{Binding CancelCommand}" IsEnabled="{Binding IsBusy}"/>
+              <TextBlock Text="{Binding Message}" VerticalAlignment="Center"/>
+            </DockPanel>
+          </StackPanel>
+          <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="24">
+              <TextBlock Text="Construct evaluation" Style="{StaticResource Heading}"/>
+              <TextBlock Text="Compare neutral, style, interview, questionnaire and combined conditions on new choices. A single owner's results are descriptive." Margin="0,0,0,20"/>
+              <Border Style="{StaticResource Card}">
+                <StackPanel>
+                  <WrapPanel IsEnabled="{Binding IsIdle}">
+                    <Button Content="Refresh constructs" Command="{Binding RefreshCommand}"/>
+                    <ComboBox ItemsSource="{Binding Constructs}" SelectedItem="{Binding SelectedConstruct}" Width="250">
+                      <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                          <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text=" · v"/>
+                            <TextBlock Text="{Binding Version}"/>
+                            <TextBlock Text=" · "/>
+                            <TextBlock Text="{Binding Status}"/>
+                          </StackPanel>
+                        </DataTemplate>
+                      </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Button Content="Load owner's cases" Command="{Binding LoadSelectedCommand}"/>
+                  </WrapPanel>
+                  <TextBlock Text="New held-out question" Style="{StaticResource Label}"/>
+                  <TextBox Text="{Binding Question}" AcceptsReturn="True" Height="65" TextWrapping="Wrap"/>
+                  <TextBlock Text="Options · one per line" Style="{StaticResource Label}"/>
+                  <TextBox Text="{Binding OptionsText}" AcceptsReturn="True" Height="90" VerticalScrollBarVisibility="Auto"/>
+                  <TextBlock Text="Owner's T0 answer · exact option text" Style="{StaticResource Label}"/>
+                  <TextBox Text="{Binding AnswerT0}"/>
+                  <CheckBox Content="This question and its answer were excluded from the construct's interview and questionnaire." IsChecked="{Binding HeldOutConfirmed}"/>
+                  <Button Content="Seal case and T0 answer" Command="{Binding SealCommand}" Style="{StaticResource Primary}" HorizontalAlignment="Left" IsEnabled="{Binding IsIdle}"/>
+                </StackPanel>
+              </Border>
+              <Border Style="{StaticResource Card}">
+                <StackPanel>
+                  <DataGrid ItemsSource="{Binding Cases}" SelectedItem="{Binding SelectedCase}" IsReadOnly="True" Height="150">
+                    <DataGrid.Columns>
+                      <DataGridTextColumn Header="Held-out question" Binding="{Binding Question}" Width="*"/>
+                      <DataGridTextColumn Header="Case ID" Binding="{Binding Id}" Width="260"/>
+                    </DataGrid.Columns>
+                  </DataGrid>
+                  <ItemsControl ItemsSource="{Binding SelectedCase.Options}" Margin="0,10"/>
+                  <TextBlock Text="Later T1 answer · exact option text" Style="{StaticResource Label}"/>
+                  <TextBox Text="{Binding AnswerT1}"/>
+                  <WrapPanel>
+                    <Button Content="Save retest" Command="{Binding RetestCommand}" IsEnabled="{Binding IsIdle}"/>
+                    <Button Content="Evaluate five conditions" Command="{Binding PredictCommand}" Style="{StaticResource Primary}" IsEnabled="{Binding IsIdle}"/>
+                    <Button Content="Cancel" Command="{Binding CancelCommand}"/>
+                    <Button Content="Export evaluation" Command="{Binding ExportCommand}" IsEnabled="{Binding IsIdle}"/>
+                  </WrapPanel>
+                  <TextBlock Text="Saved predictions and answers cannot be replaced. Canceling retains completed conditions. Use a new case or construct version for a new experiment." Foreground="{StaticResource Muted}"/>
+                </StackPanel>
+              </Border>
+              <Border Style="{StaticResource Card}">
+                <StackPanel>
+                  <TextBlock Text="{Binding Summary}" Margin="0,0,0,12"/>
+                  <DataGrid ItemsSource="{Binding Summaries}" IsReadOnly="True" Height="230">
+                    <DataGrid.Columns>
+                      <DataGridTextColumn Header="Condition" Binding="{Binding Condition}" Width="*"/>
+                      <DataGridTextColumn Header="Cases" Binding="{Binding Cases}" Width="75"/>
+                      <DataGridTextColumn Header="T0 match" Binding="{Binding AccuracyT0, StringFormat=P1}" Width="110"/>
+                      <DataGridTextColumn Header="T1 match" Binding="{Binding AccuracyT1, StringFormat=P1}" Width="110"/>
+                      <DataGridTextColumn Header="Retest n" Binding="{Binding RetestCount}" Width="90"/>
+                      <DataGridTextColumn Header="Owner retest agreement" Binding="{Binding RetestAgreement, StringFormat=P1}" Width="190"/>
+                    </DataGrid.Columns>
+                  </DataGrid>
+                  <TextBlock Text="These results do not establish personality validity, translation quality, or a production release decision. The development plan specifies the larger independent study." Foreground="{StaticResource Muted}" Margin="0,14"/>
+                </StackPanel>
+              </Border>
+            </StackPanel>
+          </ScrollViewer>
+        </DockPanel>
+      </TabItem>
+      <TabItem Header="History">
+        <DockPanel DataContext="{Binding History}">
+          <StackPanel DockPanel.Dock="Bottom" Background="#E2EFEC">
+            <ProgressBar IsIndeterminate="{Binding IsBusy}" Height="3"/>
+            <DockPanel Margin="12,6">
+              <Button DockPanel.Dock="Right" Content="Cancel" Command="{Binding CancelCommand}" IsEnabled="{Binding IsBusy}"/>
+              <TextBlock Text="{Binding Message}" VerticalAlignment="Center"/>
+            </DockPanel>
+          </StackPanel>
+          <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="24">
+              <TextBlock Text="Run history and review" Style="{StaticResource Heading}"/>
+              <TextBlock Text="Reopen saved evidence, add human assessments, and export a report." Margin="0,0,0,20"/>
+              <Border Style="{StaticResource Card}">
+                <StackPanel>
+                  <WrapPanel>
+                    <Button Content="Refresh history" Command="{Binding RefreshCommand}"/>
+                    <Button Content="Export selected run" Command="{Binding ExportCommand}"/>
+                    <Button Content="Open export folder" Command="{Binding OpenExportCommand}"/>
+                  </WrapPanel>
+                  <DataGrid ItemsSource="{Binding Runs}" SelectedItem="{Binding SelectedRun}" IsReadOnly="True" Height="180">
+                    <DataGrid.Columns>
+                      <DataGridTextColumn Header="Dataset" Binding="{Binding DatasetName}" Width="*"/>
+                      <DataGridTextColumn Header="Started" Binding="{Binding StartedAt, StringFormat=g}" Width="220"/>
+                      <DataGridTextColumn Header="State" Binding="{Binding State}" Width="110"/>
+                      <DataGridTextColumn Header="Run ID" Binding="{Binding Id}" Width="260"/>
+                    </DataGrid.Columns>
+                  </DataGrid>
+                  <DataGrid ItemsSource="{Binding Results}" SelectedItem="{Binding SelectedResult}" IsReadOnly="True" Height="220" Margin="0,18">
+                    <DataGrid.Columns>
+                      <DataGridTextColumn Header="Sample" Binding="{Binding CaseName}" Width="140"/>
+                      <DataGridTextColumn Header="Arm" Binding="{Binding Arm}" Width="85"/>
+                      <DataGridTextColumn Header="Transcript" Binding="{Binding Output.Transcript}" Width="*"/>
+                      <DataGridTextColumn Header="Translation" Binding="{Binding Output.Translation}" Width="*"/>
+                      <DataGridTextColumn Header="WER" Binding="{Binding WordScore.Rate, StringFormat=P1}" Width="65"/>
+                      <DataGridTextColumn Header="Request ms" Binding="{Binding Output.TotalMs, StringFormat=N0}" Width="90"/>
+                      <DataGridTextColumn Header="Error" Binding="{Binding Error}" Width="130"/>
+                    </DataGrid.Columns>
+                  </DataGrid>
+                  <TextBlock Text="Selected translation" Style="{StaticResource Label}"/>
+                  <TextBox Text="{Binding SelectedResult.Output.Translation, Mode=OneWay}" IsReadOnly="True" Height="80" TextWrapping="Wrap"/>
+                  <TextBlock Text="Reference translation" Style="{StaticResource Label}"/>
+                  <TextBox Text="{Binding SelectedResult.ReferenceTranslation, Mode=OneWay}" IsReadOnly="True" Height="80" TextWrapping="Wrap"/>
+                </StackPanel>
+              </Border>
+              <Border Style="{StaticResource Card}">
+                <StackPanel>
+                  <TextBlock Text="Human assessment" Style="{StaticResource Section}"/>
+                  <TextBlock Text="Adequacy: 1 no meaning preserved · 3 partly preserved · 5 all meaning preserved. Style: 1 poor resemblance · 5 strong resemblance, or blank if not assessed. This local review is not blinded." Foreground="{StaticResource Muted}"/>
+                  <WrapPanel>
+                    <StackPanel Margin="0,0,20,0">
+                      <TextBlock Text="Adequacy 1–5" Style="{StaticResource Label}"/>
+                      <TextBox Text="{Binding Adequacy}" Width="130"/>
+                    </StackPanel>
+                    <StackPanel>
+                      <TextBlock Text="Style 1–5 (optional)" Style="{StaticResource Label}"/>
+                      <TextBox Text="{Binding Style}" Width="150"/>
+                    </StackPanel>
+                  </WrapPanel>
+                  <CheckBox Content="Critical meaning error: changed negation, number, certainty, identity, or commitment" IsChecked="{Binding CriticalMeaningError}"/>
+                  <TextBox Text="{Binding Notes}" AcceptsReturn="True" TextWrapping="Wrap" Height="90"/>
+                  <Button Content="Save review of selected output" Command="{Binding ReviewCommand}" HorizontalAlignment="Left" Style="{StaticResource Primary}"/>
+                </StackPanel>
+              </Border>
+            </StackPanel>
+          </ScrollViewer>
+        </DockPanel>
+      </TabItem>
+      <TabItem Header="Setup">
+        <DockPanel DataContext="{Binding Settings}">
+          <StackPanel DockPanel.Dock="Bottom" Background="#E2EFEC">
+            <ProgressBar IsIndeterminate="{Binding IsBusy}" Height="3"/>
+            <DockPanel Margin="12,6">
+              <Button DockPanel.Dock="Right" Content="Cancel" Command="{Binding CancelCommand}" IsEnabled="{Binding IsBusy}"/>
+              <TextBlock Text="{Binding Message}" VerticalAlignment="Center"/>
+            </DockPanel>
+          </StackPanel>
+          <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="24">
+              <TextBlock Text="Your workspace, ready to speak" Style="{StaticResource Heading}"/>
+              <TextBlock Text="Included speech works immediately. Add a language model when you need more translation languages or AI suggestions." Margin="0,0,0,20"/>
+              <Border Style="{StaticResource Card}">
+                <StackPanel>
+                  <TextBlock Text="Included speech" Style="{StaticResource Section}"/>
+                  <TextBlock Text="{Binding SpeechStatus}" FontWeight="SemiBold" Margin="0,8"/>
+                  <CheckBox Content="Use included speech engine and multilingual model" IsChecked="{Binding UseBundledSpeech}"/>
+                  <WrapPanel IsEnabled="{Binding IsIdle}">
+                    <Button Content="Check speech package" Command="{Binding CheckSpeechCommand}"/>
+                    <Button Content="Restore included speech" Command="{Binding RestoreBundledCommand}"/>
+                  </WrapPanel>
+                  <TextBlock Text="Whisper Base multilingual runs on your CPU. No API key or separate runtime installer is required. Speech recognition and audio-to-English translation are available on Start." Foreground="{StaticResource Muted}" Margin="0,12"/>
+                </StackPanel>
+              </Border>
+              <Border Style="{StaticResource Card}">
+                <StackPanel>
+                  <TextBlock Text="Optional · translation and personality models" Style="{StaticResource Section}"/>
+                  <TextBlock Text="For translation into other languages, personality style, suggested claims and held-out predictions, install Ollama and a language model. No language model is bundled."/>
+                  <WrapPanel IsEnabled="{Binding IsIdle}">
+                    <Button Content="Get Ollama for Windows" Command="{Binding OpenOllamaCommand}"/>
+                    <Button Content="Connect / refresh models" Command="{Binding ConnectCommand}"/>
+                  </WrapPanel>
+                  <TextBlock Text="{Binding TranslationStatus}" Foreground="{StaticResource Muted}" Margin="0,8"/>
+                  <TextBlock Text="Baseline model" Style="{StaticResource Label}"/>
+                  <ComboBox ItemsSource="{Binding Models}" Text="{Binding BaselineModel, UpdateSourceTrigger=PropertyChanged}" IsEditable="True"/>
+                  <TextBlock Text="Candidate and personality model" Style="{StaticResource Label}"/>
+                  <ComboBox ItemsSource="{Binding Models}" Text="{Binding CandidateModel, UpdateSourceTrigger=PropertyChanged}" IsEditable="True"/>
+                  <TextBlock Text="Choose the same model in both slots to isolate personality style in a comparison." Foreground="{StaticResource Muted}" Margin="0,12"/>
+                </StackPanel>
+              </Border>
+              <Expander Header="Advanced · server and custom speech files" Margin="0,0,0,16">
+                <Border Style="{StaticResource Card}">
+                  <StackPanel>
+                    <TextBlock Text="Model server address" Style="{StaticResource Label}"/>
+                    <TextBox Text="{Binding OllamaUrl, UpdateSourceTrigger=PropertyChanged}"/>
+                    <CheckBox Content="Allow personal text to be sent to a remote HTTPS model server" IsChecked="{Binding AllowRemote}"/>
+                    <TextBlock Text="Remote authentication gateways are not supported. Local speech does not send audio to this server." Foreground="{StaticResource Muted}"/>
+                    <TextBlock Text="Custom Whisper executable" Style="{StaticResource Label}"/>
+                    <DockPanel>
+                      <Button DockPanel.Dock="Right" Content="Browse" Command="{Binding BrowseWhisperCommand}"/>
+                      <TextBox Text="{Binding WhisperExecutable}"/>
+                    </DockPanel>
+                    <TextBlock Text="Custom GGML model" Style="{StaticResource Label}"/>
+                    <DockPanel>
+                      <Button DockPanel.Dock="Right" Content="Browse" Command="{Binding BrowseModelCommand}"/>
+                      <TextBox Text="{Binding WhisperModel}"/>
+                    </DockPanel>
+                  </StackPanel>
+                </Border>
+              </Expander>
+              <Border Style="{StaticResource Card}">
+                <StackPanel>
+                  <TextBlock Text="Saved data" Style="{StaticResource Section}"/>
+                  <TextBlock Text="Saved personality profiles, runs and recordings are encrypted for this Windows user. Use the same Windows account to read them. Quick tests are temporary; exported reports and text files are readable files."/>
+                  <WrapPanel IsEnabled="{Binding IsIdle}">
+                    <Button Content="Open data folder" Command="{Binding OpenDataFolderCommand}"/>
+                    <Button Content="Save setup" Command="{Binding SaveCommand}" Style="{StaticResource Primary}"/>
+                  </WrapPanel>
+                </StackPanel>
+              </Border>
+            </StackPanel>
+          </ScrollViewer>
+        </DockPanel>
+      </TabItem>
+      <TabItem Header="Participation">
+        <controls:ParticipationView DataContext="{Binding Participation}"/>
+      </TabItem>
+    </TabControl>
+  </DockPanel>
+</Window>

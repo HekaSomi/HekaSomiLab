@@ -1,0 +1,7 @@
+$ /workspace/scratch/1b9a76cfb67b/dotnet/dotnet publish src/HekaSomi.Lab.Desktop/HekaSomi.Lab.Desktop.csproj -c Release -r win-x64 --self-contained true --no-restore -p:PublishTrimmed=false -p:PublishSingleFile=false -p:BuildInParallel=false -m:1 -o artifacts/windows-x64
+  HekaSomi.Lab.Core -> /workspace/scratch/1b9a76cfb67b/lab/HekaSomi-Lab-Source/src/HekaSomi.Lab.Core/bin/Release/net10.0/win-x64/HekaSomi.Lab.Core.dll
+  HekaSomi.Lab.Infrastructure -> /workspace/scratch/1b9a76cfb67b/lab/HekaSomi-Lab-Source/src/HekaSomi.Lab.Infrastructure/bin/Release/net10.0/win-x64/HekaSomi.Lab.Infrastructure.dll
+  HekaSomi.Lab.Desktop -> /workspace/scratch/1b9a76cfb67b/lab/HekaSomi-Lab-Source/src/HekaSomi.Lab.Desktop/bin/Release/net10.0-windows/win-x64/HekaSomi.Lab.dll
+  HekaSomi.Lab.Desktop -> /workspace/scratch/1b9a76cfb67b/lab/HekaSomi-Lab-Source/artifacts/windows-x64/
+
+Exit: 0

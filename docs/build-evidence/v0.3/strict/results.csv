@@ -1,0 +1,11 @@
+﻿Case,Arm,Transcript,Translation,WER,CER,OfflineRequestMs,Evidence,Error
+"Negation","Baseline","Please cancel my reservation.","Por favor, cancele mi reserva.","0.3333333333333333","0.16666666666666666","","Fixture replay · not measured model inference",""
+"Negation","Candidate","Please do not cancel my reservation.","Por favor, no cancele mi reserva.","0","0","","Fixture replay · not measured model inference",""
+"Numbers","Candidate","The meeting starts at three thirty.","La reunión empieza a las tres y media.","0","0","","Fixture replay · not measured model inference",""
+"Numbers","Baseline","The meeting starts at three thirteen.","La reunión empieza a las tres y trece.","0.16666666666666666","0.10344827586206896","","Fixture replay · not measured model inference",""
+"Uncertainty","Baseline","I will be able to join tomorrow.","Podré unirme mañana.","0.14285714285714285","0.15384615384615385","","Fixture replay · not measured model inference",""
+"Uncertainty","Candidate","I might be able to join tomorrow.","Quizá pueda unirme mañana.","0","0","","Fixture replay · not measured model inference",""
+"Names","Candidate","Mina will meet Daniel at the station.","Mina se encontrará con Daniel en la estación.","0","0","","Fixture replay · not measured model inference",""
+"Names","Baseline","Mina will meet Daniel at the station.","Mina se encontrará con Daniel en la estación.","0","0","","Fixture replay · not measured model inference",""
+"Natural conversation","Baseline","Could you explain that a little more slowly?","¿Podrías explicarlo un poco más despacio?","0","0","","Fixture replay · not measured model inference",""
+"Natural conversation","Candidate","Could you explain that a little more slowly?","¿Podrías explicarlo un poco más despacio?","0","0","","Fixture replay · not measured model inference",""

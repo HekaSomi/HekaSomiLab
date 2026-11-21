@@ -1,0 +1,5 @@
+read_audio_data: reading audio data from 'samples/demo-1.wav' ...
+read_audio_data: trying to decode with miniaudio
+
+[00:00:00.000 --> 00:00:02.320]   Please do not cancel my reservation.
+output_txt: saving output to 'artifacts/real-speech-check.txt'

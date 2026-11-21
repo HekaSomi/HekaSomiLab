@@ -1,0 +1,389 @@
+{
+  "id": "5af8db6fe7ca48229fde1042126d77a0",
+  "startedAt": "2026-11-13T09:00:54.248687+00:00",
+  "datasetName": "Demo \u00B7 fixed fixtures, synthetic speech",
+  "datasetHash": "61f5a56daaaccf35734bd2d2cbcc518f1efa062670b5af6b43ee4eba21806660",
+  "baseline": {
+    "name": "Baseline",
+    "kind": "Replay",
+    "ollamaUrl": "http://localhost:11434",
+    "model": "",
+    "whisperExecutable": "",
+    "whisperModel": "",
+    "usePersonality": false,
+    "timeoutSeconds": 180,
+    "temperature": 0
+  },
+  "candidate": {
+    "name": "Candidate",
+    "kind": "Replay",
+    "ollamaUrl": "http://localhost:11434",
+    "model": "",
+    "whisperExecutable": "",
+    "whisperModel": "",
+    "usePersonality": false,
+    "timeoutSeconds": 180,
+    "temperature": 0
+  },
+  "constructId": null,
+  "constructVersion": null,
+  "constructHash": null,
+  "audioHashes": {
+    "demo-1": "38f3ae0b9820a1d0c0899af83b604859cd9642585a0d860a47f69022432cfcfa",
+    "demo-2": "c724ec5dded4e756872f31da3814b6a183383f1bd8281c79d8dcafd75f23f4b4",
+    "demo-3": "1cc6d5bdf5f88989a4d47d98f40082fa5d2bc99e8aa3e7236850965048afa8ee",
+    "demo-4": "dc59e42ac5d00024939b69b67fe337156fb5ac1f11681ea0eb178ac83c7c8693",
+    "demo-5": "a73dab2f113a99b987e4439d973d6e1a518e2133f3be1da30680ea94a965094c"
+  },
+  "environment": "Debian GNU/Linux 13 (trixie); .NET 10.0.15; 9 logical CPUs",
+  "state": "Completed",
+  "results": [
+    {
+      "caseId": "demo-1",
+      "caseName": "Negation",
+      "arm": "Baseline",
+      "referenceTranscript": "Please do not cancel my reservation.",
+      "referenceTranslation": "Por favor, no cancele mi reserva.",
+      "output": {
+        "transcript": "Please cancel my reservation.",
+        "translation": "Por favor, cancele mi reserva.",
+        "asrMs": null,
+        "translationMs": null,
+        "totalMs": null,
+        "evidenceKind": "Fixture replay \u00B7 not measured model inference"
+      },
+      "wordScore": {
+        "substitutions": 0,
+        "deletions": 2,
+        "insertions": 0,
+        "referenceUnits": 6,
+        "errors": 2,
+        "rate": 0.3333333333333333
+      },
+      "characterScore": {
+        "substitutions": 0,
+        "deletions": 5,
+        "insertions": 0,
+        "referenceUnits": 30,
+        "errors": 5,
+        "rate": 0.16666666666666666
+      },
+      "error": null
+    },
+    {
+      "caseId": "demo-1",
+      "caseName": "Negation",
+      "arm": "Candidate",
+      "referenceTranscript": "Please do not cancel my reservation.",
+      "referenceTranslation": "Por favor, no cancele mi reserva.",
+      "output": {
+        "transcript": "Please do not cancel my reservation.",
+        "translation": "Por favor, no cancele mi reserva.",
+        "asrMs": null,
+        "translationMs": null,
+        "totalMs": null,
+        "evidenceKind": "Fixture replay \u00B7 not measured model inference"
+      },
+      "wordScore": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "referenceUnits": 6,
+        "errors": 0,
+        "rate": 0
+      },
+      "characterScore": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "referenceUnits": 30,
+        "errors": 0,
+        "rate": 0
+      },
+      "error": null
+    },
+    {
+      "caseId": "demo-2",
+      "caseName": "Numbers",
+      "arm": "Candidate",
+      "referenceTranscript": "The meeting starts at three thirty.",
+      "referenceTranslation": "La reuni\u00F3n empieza a las tres y media.",
+      "output": {
+        "transcript": "The meeting starts at three thirty.",
+        "translation": "La reuni\u00F3n empieza a las tres y media.",
+        "asrMs": null,
+        "translationMs": null,
+        "totalMs": null,
+        "evidenceKind": "Fixture replay \u00B7 not measured model inference"
+      },
+      "wordScore": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "referenceUnits": 6,
+        "errors": 0,
+        "rate": 0
+      },
+      "characterScore": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "referenceUnits": 29,
+        "errors": 0,
+        "rate": 0
+      },
+      "error": null
+    },
+    {
+      "caseId": "demo-2",
+      "caseName": "Numbers",
+      "arm": "Baseline",
+      "referenceTranscript": "The meeting starts at three thirty.",
+      "referenceTranslation": "La reuni\u00F3n empieza a las tres y media.",
+      "output": {
+        "transcript": "The meeting starts at three thirteen.",
+        "translation": "La reuni\u00F3n empieza a las tres y trece.",
+        "asrMs": null,
+        "translationMs": null,
+        "totalMs": null,
+        "evidenceKind": "Fixture replay \u00B7 not measured model inference"
+      },
+      "wordScore": {
+        "substitutions": 1,
+        "deletions": 0,
+        "insertions": 0,
+        "referenceUnits": 6,
+        "errors": 1,
+        "rate": 0.16666666666666666
+      },
+      "characterScore": {
+        "substitutions": 1,
+        "deletions": 0,
+        "insertions": 2,
+        "referenceUnits": 29,
+        "errors": 3,
+        "rate": 0.10344827586206896
+      },
+      "error": null
+    },
+    {
+      "caseId": "demo-3",
+      "caseName": "Uncertainty",
+      "arm": "Baseline",
+      "referenceTranscript": "I might be able to join tomorrow.",
+      "referenceTranslation": "Quiz\u00E1 pueda unirme ma\u00F1ana.",
+      "output": {
+        "transcript": "I will be able to join tomorrow.",
+        "translation": "Podr\u00E9 unirme ma\u00F1ana.",
+        "asrMs": null,
+        "translationMs": null,
+        "totalMs": null,
+        "evidenceKind": "Fixture replay \u00B7 not measured model inference"
+      },
+      "wordScore": {
+        "substitutions": 1,
+        "deletions": 0,
+        "insertions": 0,
+        "referenceUnits": 7,
+        "errors": 1,
+        "rate": 0.14285714285714285
+      },
+      "characterScore": {
+        "substitutions": 3,
+        "deletions": 1,
+        "insertions": 0,
+        "referenceUnits": 26,
+        "errors": 4,
+        "rate": 0.15384615384615385
+      },
+      "error": null
+    },
+    {
+      "caseId": "demo-3",
+      "caseName": "Uncertainty",
+      "arm": "Candidate",
+      "referenceTranscript": "I might be able to join tomorrow.",
+      "referenceTranslation": "Quiz\u00E1 pueda unirme ma\u00F1ana.",
+      "output": {
+        "transcript": "I might be able to join tomorrow.",
+        "translation": "Quiz\u00E1 pueda unirme ma\u00F1ana.",
+        "asrMs": null,
+        "translationMs": null,
+        "totalMs": null,
+        "evidenceKind": "Fixture replay \u00B7 not measured model inference"
+      },
+      "wordScore": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "referenceUnits": 7,
+        "errors": 0,
+        "rate": 0
+      },
+      "characterScore": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "referenceUnits": 26,
+        "errors": 0,
+        "rate": 0
+      },
+      "error": null
+    },
+    {
+      "caseId": "demo-4",
+      "caseName": "Names",
+      "arm": "Candidate",
+      "referenceTranscript": "Mina will meet Daniel at the station.",
+      "referenceTranslation": "Mina se encontrar\u00E1 con Daniel en la estaci\u00F3n.",
+      "output": {
+        "transcript": "Mina will meet Daniel at the station.",
+        "translation": "Mina se encontrar\u00E1 con Daniel en la estaci\u00F3n.",
+        "asrMs": null,
+        "translationMs": null,
+        "totalMs": null,
+        "evidenceKind": "Fixture replay \u00B7 not measured model inference"
+      },
+      "wordScore": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "referenceUnits": 7,
+        "errors": 0,
+        "rate": 0
+      },
+      "characterScore": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "referenceUnits": 30,
+        "errors": 0,
+        "rate": 0
+      },
+      "error": null
+    },
+    {
+      "caseId": "demo-4",
+      "caseName": "Names",
+      "arm": "Baseline",
+      "referenceTranscript": "Mina will meet Daniel at the station.",
+      "referenceTranslation": "Mina se encontrar\u00E1 con Daniel en la estaci\u00F3n.",
+      "output": {
+        "transcript": "Mina will meet Daniel at the station.",
+        "translation": "Mina se encontrar\u00E1 con Daniel en la estaci\u00F3n.",
+        "asrMs": null,
+        "translationMs": null,
+        "totalMs": null,
+        "evidenceKind": "Fixture replay \u00B7 not measured model inference"
+      },
+      "wordScore": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "referenceUnits": 7,
+        "errors": 0,
+        "rate": 0
+      },
+      "characterScore": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "referenceUnits": 30,
+        "errors": 0,
+        "rate": 0
+      },
+      "error": null
+    },
+    {
+      "caseId": "demo-5",
+      "caseName": "Natural conversation",
+      "arm": "Baseline",
+      "referenceTranscript": "Could you explain that a little more slowly?",
+      "referenceTranslation": "\u00BFPodr\u00EDas explicarlo un poco m\u00E1s despacio?",
+      "output": {
+        "transcript": "Could you explain that a little more slowly?",
+        "translation": "\u00BFPodr\u00EDas explicarlo un poco m\u00E1s despacio?",
+        "asrMs": null,
+        "translationMs": null,
+        "totalMs": null,
+        "evidenceKind": "Fixture replay \u00B7 not measured model inference"
+      },
+      "wordScore": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "referenceUnits": 8,
+        "errors": 0,
+        "rate": 0
+      },
+      "characterScore": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "referenceUnits": 36,
+        "errors": 0,
+        "rate": 0
+      },
+      "error": null
+    },
+    {
+      "caseId": "demo-5",
+      "caseName": "Natural conversation",
+      "arm": "Candidate",
+      "referenceTranscript": "Could you explain that a little more slowly?",
+      "referenceTranslation": "\u00BFPodr\u00EDas explicarlo un poco m\u00E1s despacio?",
+      "output": {
+        "transcript": "Could you explain that a little more slowly?",
+        "translation": "\u00BFPodr\u00EDas explicarlo un poco m\u00E1s despacio?",
+        "asrMs": null,
+        "translationMs": null,
+        "totalMs": null,
+        "evidenceKind": "Fixture replay \u00B7 not measured model inference"
+      },
+      "wordScore": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "referenceUnits": 8,
+        "errors": 0,
+        "rate": 0
+      },
+      "characterScore": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "referenceUnits": 36,
+        "errors": 0,
+        "rate": 0
+      },
+      "error": null
+    }
+  ],
+  "gates": [
+    {
+      "metric": "Execution",
+      "status": "Pass",
+      "detail": "Completed; 0 case/arm errors."
+    },
+    {
+      "metric": "WER regression (descriptive)",
+      "status": "Pass",
+      "detail": "Change -11.76 %; permitted increase 1.00 %. No inferential release claim."
+    },
+    {
+      "metric": "Translation meaning",
+      "status": "Inconclusive",
+      "detail": "Independent bilingual adequacy and critical-error review required."
+    },
+    {
+      "metric": "Behavioral validity",
+      "status": "Inconclusive",
+      "detail": "Independent owner study and retest required."
+    },
+    {
+      "metric": "Live caption latency",
+      "status": "NotApplicable",
+      "detail": "This runner measures offline requests, not live caption rendering."
+    }
+  ]
+}

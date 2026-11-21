@@ -1,0 +1,20 @@
+HekaSomi Translation Lab 0.3 — Windows x64
+
+1. Extract this entire ZIP into a new folder.
+2. Open HekaSomi.Lab.exe.
+3. On Start, click Try sample to run real speech recognition.
+4. Record your voice or choose an audio file, then Transcribe audio.
+5. To translate speech into English, check Translate speech into English.
+6. Approve a personality and accept the optional test invitation, or open Participation.
+7. Answer the practice test, confirm its questions were held out, and seal your answers.
+8. Preview the profile context, choose a model or personal-agent task exchange, and compare.
+
+Read docs/PARTICIPATION_GUIDE.md for provider keys, manual agent exchange and platform results.
+The dashboard computes matches against your choices. It does not certify a personality copy.
+Global averages and real game events require the web endpoints described in the included plans.
+
+Whisper, its multilingual model and .NET are included. No separate speech setup.
+Other translation languages and AI personality suggestions need optional Ollama and a language model; Setup guides you there. Participation also supports developer model APIs and manual task exchange with personal agents. A subscription alone does not necessarily grant API access.
+
+Existing data stays in the same Windows-user folder. See README.md for details.
+This unsigned development build needs the checks in docs/WINDOWS_SMOKE_TEST.md.

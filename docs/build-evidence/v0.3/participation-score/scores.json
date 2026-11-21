@@ -1,0 +1,21 @@
+[
+  {
+    "id": "synthetic-run",
+    "provider": "synthetic",
+    "model": "fixture",
+    "condition": "Combined",
+    "evidenceKind": "synthetic-demo",
+    "testHash": "45769c20935779f40a2d9ebf3de032f70232b7c91dca9ad133fc091714ebebdc",
+    "score": {
+      "eligible": 12,
+      "completed": 12,
+      "answered": 12,
+      "matches": 6,
+      "matchPercent": 50,
+      "coveragePercent": 100,
+      "answeredMatchPercent": 50,
+      "missing": 0
+    },
+    "provenance": "file-unverified"
+  }
+]

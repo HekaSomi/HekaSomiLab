@@ -1,0 +1,55 @@
+{
+  "tag": "b5454",
+  "stableVersion": "v1.9.5",
+  "compiler": "LLVM-MinGW 20261104 UCRT",
+  "configuration": [
+    "BUILD_SHARED_LIBS=OFF",
+    "GGML_NATIVE=OFF",
+    "GGML_OPENMP=OFF",
+    "GGML_AVX=OFF",
+    "GGML_AVX2=OFF",
+    "GGML_AVX512=OFF",
+    "GGML_FMA=OFF",
+    "GGML_F16C=OFF",
+    "WHISPER_BUILD_TESTS=OFF",
+    "WHISPER_SDL2=OFF",
+    "CMAKE_EXE_LINKER_FLAGS=-static"
+  ],
+  "patch": "Added #include <algorithm> to examples/common.cpp.",
+  "downloads": {
+    "toolchain.tar.xz": [
+      "https://github.com/mstorsjo/llvm-mingw/releases/download/20261104/llvm-mingw-20261104-ucrt-ubuntu-22.04-x86_64.tar.xz",
+      "919380403de87dca3c581c2053230cd298af5e891286628ba0613b7fed370926"
+    ],
+    "source.tar.gz": [
+      "https://api.github.com/repos/ggml-org/whisper.cpp/tarball/b5454",
+      "be49b097b23e24283c1070e6df34337134757e9be05a6525e3c526d943051adb"
+    ],
+    "linux.tar.gz": [
+      "https://github.com/ggml-org/whisper.cpp/releases/download/b5454/whisper-bin-ubuntu-x64.tar.gz",
+      "a72becf15d7917f990f6313867a52638b82b7f9ef237fb0c980dac56a135781c"
+    ],
+    "ggml-base-q5_1.bin": [
+      "https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-base-q5_1.bin",
+      "422f1ae452ade6f30a004d7e5c6a43195e4433bc370bf23fac9cc591f01a8898"
+    ]
+  },
+  "directWindowsImports": [
+    "KERNEL32.dll",
+    "api-ms-win-crt-stdio-l1-1-0.dll",
+    "api-ms-win-crt-string-l1-1-0.dll",
+    "api-ms-win-crt-runtime-l1-1-0.dll",
+    "api-ms-win-crt-locale-l1-1-0.dll",
+    "api-ms-win-crt-heap-l1-1-0.dll",
+    "api-ms-win-crt-environment-l1-1-0.dll",
+    "api-ms-win-crt-private-l1-1-0.dll",
+    "api-ms-win-crt-math-l1-1-0.dll",
+    "api-ms-win-crt-convert-l1-1-0.dll",
+    "api-ms-win-crt-utility-l1-1-0.dll",
+    "api-ms-win-crt-time-l1-1-0.dll",
+    "api-ms-win-crt-multibyte-l1-1-0.dll",
+    "ADVAPI32.dll",
+    "api-ms-win-crt-filesystem-l1-1-0.dll"
+  ],
+  "exeSha256": "d80d8e26fa486b4ca0a7a5d30273f49eb6012fd53e75d13f50a5a048ac18ac20"
+}

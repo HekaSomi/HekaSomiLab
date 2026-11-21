@@ -1,0 +1,11 @@
+  HekaSomi.Lab.Core -> /workspace/scratch/e80978a6ec40/hekasomi-lab-app/src/HekaSomi.Lab.Core/bin/Release/net10.0/HekaSomi.Lab.Core.dll
+  HekaSomi.Lab.Infrastructure -> /workspace/scratch/e80978a6ec40/hekasomi-lab-app/src/HekaSomi.Lab.Infrastructure/bin/Release/net10.0/HekaSomi.Lab.Infrastructure.dll
+  HekaSomi.Lab.Desktop -> /workspace/scratch/e80978a6ec40/hekasomi-lab-app/src/HekaSomi.Lab.Desktop/bin/Release/net10.0-windows/HekaSomi.Lab.dll
+  HekaSomi.Lab.Runner -> /workspace/scratch/e80978a6ec40/hekasomi-lab-app/src/HekaSomi.Lab.Runner/bin/Release/net10.0/HekaSomi.Lab.Runner.dll
+  HekaSomi.Lab.Tests -> /workspace/scratch/e80978a6ec40/hekasomi-lab-app/tests/HekaSomi.Lab.Tests/bin/Release/net10.0/HekaSomi.Lab.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:14.20

@@ -1,0 +1,58 @@
+name: Windows desktop verification
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build-test-package:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+          cache: true
+          cache-dependency-path: '**/packages.lock.json'
+      - name: Build, test and publish
+        shell: pwsh
+        run: ./scripts/Build.ps1
+      - name: Check bundled native speech on Windows
+        shell: pwsh
+        run: |
+          & './artifacts/windows-x64/assets/whisper/windows-x64/whisper-cli.exe' -m './artifacts/windows-x64/assets/whisper/models/ggml-base-q5_1.bin' -f samples/demo-1.wav -l auto -t 4 -ng -np -otxt -of artifacts/windows-native-speech
+          if ($LASTEXITCODE -ne 0) { throw 'Bundled speech engine failed' }
+          if ((Get-Content artifacts/windows-native-speech.txt -Raw) -notmatch '(?i)do not cancel my reservation') { throw 'Speech sample did not match the expected phrase' }
+      - name: Exercise demo and strict evidence gate
+        shell: pwsh
+        run: |
+          dotnet src/HekaSomi.Lab.Runner/bin/Release/net10.0/HekaSomi.Lab.Runner.dll compare --manifest samples/demo.json --baseline-config samples/baseline.json --candidate-config samples/candidate.json --output artifacts/demo-run
+          if ($LASTEXITCODE -ne 0) { throw 'Demo comparison failed' }
+          dotnet src/HekaSomi.Lab.Runner/bin/Release/net10.0/HekaSomi.Lab.Runner.dll compare --manifest samples/demo.json --baseline-config samples/baseline.json --candidate-config samples/candidate.json --output artifacts/strict-run --strict
+          if ($LASTEXITCODE -ne 2) { throw 'Strict gate must remain inconclusive without human validation' }
+          exit 0
+      - name: Validate participation contract fixture
+        shell: pwsh
+        run: |
+          dotnet src/HekaSomi.Lab.Runner/bin/Release/net10.0/HekaSomi.Lab.Runner.dll participation-fixtures --output artifacts/participation-fixtures
+          if ($LASTEXITCODE -ne 0) { throw 'Fixture generation failed' }
+          dotnet src/HekaSomi.Lab.Runner/bin/Release/net10.0/HekaSomi.Lab.Runner.dll participation-score --report artifacts/participation-fixtures/synthetic-platform-report.json --output artifacts/participation-scores
+          if ($LASTEXITCODE -ne 0) { throw 'Participation scoring failed' }
+          $scores = @(Get-Content artifacts/participation-scores/scores.json -Raw | ConvertFrom-Json)
+          if ($scores.Count -ne 1 -or $scores[0].score.matchPercent -ne 50 -or $scores[0].score.coveragePercent -ne 100) { throw 'Fixture score drifted' }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-and-demo-evidence
+          path: |
+            artifacts/test-results
+            artifacts/windows-native-speech.txt
+            artifacts/demo-run
+            artifacts/strict-run
+            artifacts/participation-fixtures
+            artifacts/participation-scores
+      - uses: actions/upload-artifact@v4
+        with:
+          name: HekaSomi-Lab-windows-x64
+          path: artifacts/windows-x64

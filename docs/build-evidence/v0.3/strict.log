@@ -1,0 +1,19 @@
+$ /workspace/scratch/1b9a76cfb67b/dotnet/dotnet src/HekaSomi.Lab.Runner/bin/Release/net10.0/HekaSomi.Lab.Runner.dll compare --manifest samples/demo.json --baseline-config samples/baseline.json --candidate-config samples/candidate.json --output /workspace/scratch/1b9a76cfb67b/lab/HekaSomi-Lab-Source/docs/build-evidence/v0.3/strict --strict
+0/10 Baseline · Negation
+1/10 Candidate · Negation
+2/10 Candidate · Numbers
+3/10 Baseline · Numbers
+4/10 Baseline · Uncertainty
+5/10 Candidate · Uncertainty
+6/10 Candidate · Names
+7/10 Baseline · Names
+8/10 Baseline · Natural conversation
+9/10 Candidate · Natural conversation
+10/10 Completed · 10/10 outputs retained
+Pass: Execution — Completed; 0 case/arm errors.
+Pass: WER regression (descriptive) — Change -11.76 %; permitted increase 1.00 %. No inferential release claim.
+Inconclusive: Translation meaning — Independent bilingual adequacy and critical-error review required.
+Inconclusive: Behavioral validity — Independent owner study and retest required.
+NotApplicable: Live caption latency — This runner measures offline requests, not live caption rendering.
+
+Exit: 2

@@ -1,0 +1,14 @@
+$ /workspace/scratch/1b9a76cfb67b/dotnet/dotnet build HekaSomi.Lab.sln -c Release --no-restore -m:1 -p:BuildInParallel=false -v:minimal
+  HekaSomi.Lab.Core -> /workspace/scratch/1b9a76cfb67b/lab/HekaSomi-Lab-Source/src/HekaSomi.Lab.Core/bin/Release/net10.0/HekaSomi.Lab.Core.dll
+  HekaSomi.Lab.Infrastructure -> /workspace/scratch/1b9a76cfb67b/lab/HekaSomi-Lab-Source/src/HekaSomi.Lab.Infrastructure/bin/Release/net10.0/HekaSomi.Lab.Infrastructure.dll
+  HekaSomi.Lab.Desktop -> /workspace/scratch/1b9a76cfb67b/lab/HekaSomi-Lab-Source/src/HekaSomi.Lab.Desktop/bin/Release/net10.0-windows/HekaSomi.Lab.dll
+  HekaSomi.Lab.Runner -> /workspace/scratch/1b9a76cfb67b/lab/HekaSomi-Lab-Source/src/HekaSomi.Lab.Runner/bin/Release/net10.0/HekaSomi.Lab.Runner.dll
+  HekaSomi.Lab.Tests -> /workspace/scratch/1b9a76cfb67b/lab/HekaSomi-Lab-Source/tests/HekaSomi.Lab.Tests/bin/Release/net10.0/HekaSomi.Lab.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:10.96
+
+Exit: 0

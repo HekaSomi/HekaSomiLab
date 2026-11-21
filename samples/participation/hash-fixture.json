@@ -1,0 +1,120 @@
+{
+  "test": {
+    "schema": "hekasomi.participation-test/1",
+    "id": "hekasomi-scenarios-pilot",
+    "version": "1",
+    "language": "en",
+    "title": "Everyday choices \u00B7 12-question practice test",
+    "items": [
+      {
+        "id": "p01",
+        "question": "You join a meetup where you know nobody. What do you usually do first?",
+        "options": [
+          "Start a conversation",
+          "Listen before joining in",
+          "Look for a shared activity"
+        ]
+      },
+      {
+        "id": "p02",
+        "question": "Your group has one free afternoon. How would you choose what to do?",
+        "options": [
+          "Make a plan in advance",
+          "Decide together on the day",
+          "Leave time for something spontaneous"
+        ]
+      },
+      {
+        "id": "p03",
+        "question": "A friend asks you to explain a new tool. Where would you start?",
+        "options": [
+          "A concrete example",
+          "The overall idea",
+          "A step-by-step demonstration"
+        ]
+      },
+      {
+        "id": "p04",
+        "question": "You disagree with a teammate\u0027s suggestion. What feels most natural?",
+        "options": [
+          "State my concern directly",
+          "Ask questions about their reasoning",
+          "Take time to think before replying"
+        ]
+      },
+      {
+        "id": "p05",
+        "question": "You have to learn an unfamiliar game. What would you prefer?",
+        "options": [
+          "Read the rules first",
+          "Watch a round",
+          "Learn while playing"
+        ]
+      },
+      {
+        "id": "p06",
+        "question": "A group conversation moves very quickly. What do you tend to do?",
+        "options": [
+          "Jump in when I have a thought",
+          "Wait for a clear opening",
+          "Return to my point afterward"
+        ]
+      },
+      {
+        "id": "p07",
+        "question": "Your team finishes a difficult task. What would you most want to do next?",
+        "options": [
+          "Review what could improve",
+          "Celebrate with the group",
+          "Take a quiet break"
+        ]
+      },
+      {
+        "id": "p08",
+        "question": "A new activity has an uncertain outcome. Which approach suits you?",
+        "options": [
+          "Try a small experiment",
+          "Gather more information first",
+          "Ask someone to try it with me"
+        ]
+      },
+      {
+        "id": "p09",
+        "question": "You can give feedback on a project. What would you emphasize first?",
+        "options": [
+          "What works well",
+          "The most useful improvement",
+          "Questions about the creator\u0027s goals"
+        ]
+      },
+      {
+        "id": "p10",
+        "question": "You have a free evening with no commitments. What appeals most?",
+        "options": [
+          "Spend time with other people",
+          "Work on a personal interest",
+          "Rest without making a plan"
+        ]
+      },
+      {
+        "id": "p11",
+        "question": "A teammate is confused by your message. How would you clarify it?",
+        "options": [
+          "Rewrite it more briefly",
+          "Add an example",
+          "Talk it through together"
+        ]
+      },
+      {
+        "id": "p12",
+        "question": "Your group must choose between two equally good ideas. What would you suggest?",
+        "options": [
+          "Compare explicit criteria",
+          "Take a group vote",
+          "Try one and revisit later"
+        ]
+      }
+    ]
+  },
+  "expectedHash": "45769c20935779f40a2d9ebf3de032f70232b7c91dca9ad133fc091714ebebdc"
+}

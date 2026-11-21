@@ -1,0 +1,10 @@
+$ /workspace/scratch/1b9a76cfb67b/dotnet/dotnet test tests/HekaSomi.Lab.Tests -c Release --no-build --logger trx;LogFileName=tests.trx --results-directory /workspace/scratch/1b9a76cfb67b/lab/HekaSomi-Lab-Source/docs/build-evidence/v0.3
+Test run for /workspace/scratch/1b9a76cfb67b/lab/HekaSomi-Lab-Source/tests/HekaSomi.Lab.Tests/bin/Release/net10.0/HekaSomi.Lab.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+WARNING: Overwriting results file: /workspace/scratch/1b9a76cfb67b/lab/HekaSomi-Lab-Source/docs/build-evidence/v0.3/tests.trx
+Results File: /workspace/scratch/1b9a76cfb67b/lab/HekaSomi-Lab-Source/docs/build-evidence/v0.3/tests.trx
+
+Passed!  - Failed:     0, Passed:    97, Skipped:     0, Total:    97, Duration: 460 ms - HekaSomi.Lab.Tests.dll (net10.0)
+VSTEST_ARTIFACTS_DIRECTORY environment variable was not found, falling back to a user-private temporary directory. This is most likely caused by an outdated Microsoft.NET.Test.Sdk package reference in the test project.
+
+Exit: 0

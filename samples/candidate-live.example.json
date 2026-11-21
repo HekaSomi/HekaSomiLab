@@ -1,0 +1,11 @@
+{
+  "name": "Candidate",
+  "kind": "WhisperAndOllama",
+  "ollamaUrl": "http://localhost:11434",
+  "model": "REPLACE_WITH_INSTALLED_MODEL",
+  "whisperExecutable": "C:\\Models\\whisper-cli.exe",
+  "whisperModel": "C:\\Models\\ggml-base.bin",
+  "timeoutSeconds": 180,
+  "usePersonality": false,
+  "temperature": 0
+}

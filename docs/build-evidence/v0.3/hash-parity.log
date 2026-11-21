@@ -1,0 +1,4 @@
+$ node scripts/verify-participation-hash.mjs
+JavaScript/C# hash parity passed: 45769c20935779f40a2d9ebf3de032f70232b7c91dca9ad133fc091714ebebdc
+
+Exit: 0

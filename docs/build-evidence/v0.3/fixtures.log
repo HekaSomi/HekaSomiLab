@@ -1,0 +1,4 @@
+$ /workspace/scratch/1b9a76cfb67b/dotnet/dotnet src/HekaSomi.Lab.Runner/bin/Release/net10.0/HekaSomi.Lab.Runner.dll participation-fixtures --output samples/participation
+Wrote a practice test and clearly synthetic fixture. Test hash: 45769c20935779f40a2d9ebf3de032f70232b7c91dca9ad133fc091714ebebdc
+
+Exit: 0
